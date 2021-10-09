@@ -290,6 +290,44 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 }
 
 
+/**
+ * @brief 查询总线状态，仅查询bus-off状态
+ * @return int8_t 
+        0：总线正常
+        -1：总线bus-off
+ */
+ int8_t hcan_driver_query_bus_status(void)
+{
+	if(HAL_CAN_GetError(&hcan1)==HAL_CAN_ERROR_BOF)
+	{
+		printf("CAN BUS OFF"); 
+		return -1;
+	}
+	
+	else
+		return 0;
+}	 
+
+
+
+/**
+ * @brief 复位故障的CAN总线收发器
+ * @return int8_t 
+        0:成功
+        -1:失败
+ */
+ int8_t hcan_driver_fault_reset(void)
+{
+	MX_CAN1_Init();	
+	HAL_CAN_ResetError(&hcan1);
+	if(HAL_CAN_GetState(&hcan1)!=HAL_CAN_STATE_ERROR)
+		return 0;
+	else
+		return -1;
+}
+
+
+
 
 
 /* USER CODE END 1 *///用户代码结束

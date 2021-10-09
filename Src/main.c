@@ -103,8 +103,10 @@ int main(void)
   {
     /* USER CODE END WHILE */
 //  hcan_driver_send_single_frame(0x12345,Data,4);
-//	hcan_driver_send_multi_frame(0x12345,Data,4);
+	hcan_driver_send_multi_frame(0x12345,Data,4);
+		hcan_driver_query_bus_status();
 //	printf("*******************\r\n");
+		printf("can status is=%d\r\n",HAL_CAN_GetError(&hcan1));
 		HAL_Delay(500);
     /* USER CODE BEGIN 3 */
   }
