@@ -185,9 +185,7 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
     Error_Handler();
   }
 
-
-
-return 0;
+	return 0;
 }
 
 
@@ -281,7 +279,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 	TxHeader.RTR = CAN_RTR_DATA;
 	  if((hcan1.Instance->TSR & CAN_TSR_TME2) != 0U)//如果邮箱2空的，用来发多帧
 	{
-		if(HAL_CAN_AddTxMessage(&hcan1,&TxHeader,data,(uint32_t*)CAN_TX_MAILBOX2)!=0)//默认用第三邮箱发多帧
+		if(HAL_CAN_AddTxMessage(&hcan1,&TxHeader,data,(uint32_t*)CAN_TX_MAILBOX2)!=0)//默认用第2邮箱发多帧
 			return 1;
 		else
 			return 0;

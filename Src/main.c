@@ -67,7 +67,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 	uint8_t Data[8]={0xAA,0x55};
-//	hcan_frame_filter_t hcan1_fliter;
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -91,10 +91,7 @@ int main(void)
   MX_CAN1_Init();
   MX_UART5_Init();
   /* USER CODE BEGIN 2 */
-//	hcan1_fliter.can_id=0x02;
-//	hcan1_fliter.mask=0x3f;
-//	hcan_driver_hw_init(&hcan1_fliter,1);
-//  HAL_CAN_Start(&hcan1);//Æô¶¯CAN
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
