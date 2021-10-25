@@ -136,8 +136,8 @@
             <Capability>1</Capability>
             <DriverSelection>4101</DriverSelection>
           </Flash1>
-          <bUseTDR>1</bUseTDR>
-          <Flash2>BIN\UL2V8M.DLL</Flash2>
+          <bUseTDR>0</bUseTDR>
+          <Flash2>STLink\ST-LINKIII-KEIL_SWO.dll</Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
@@ -527,24 +527,24 @@
           <GroupName>Hcan</GroupName>
           <Files>
             <File>
-              <FileName>hcan.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\hcan\src\hcan.c</FilePath>
+              <FileName>hcan_private.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\hcan\src\hcan_private.h</FilePath>
             </File>
             <File>
               <FileName>hcan_muti_frame.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\hcan\src\hcan_muti_frame.c</FilePath>
+              <FilePath>..\Src\hcan_muti_frame.c</FilePath>
             </File>
             <File>
               <FileName>hcan_single_frame.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\hcan\src\hcan_single_frame.c</FilePath>
+              <FilePath>..\Src\hcan_single_frame.c</FilePath>
             </File>
             <File>
-              <FileName>hcan_private.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\hcan\src\hcan_private.h</FilePath>
+              <FileName>hcan.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\hcan.c</FilePath>
             </File>
           </Files>
         </Group>

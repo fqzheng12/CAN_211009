@@ -23,7 +23,8 @@
 #define __HCAN_H__
 
 #include "stdint.h"
-
+//#include "main.h"
+#include "stdio.h"
 /*HCAN 协议栈版本号*/
 #ifndef HCAN_VERSION
 #define HCAN_VERSION (1)
@@ -82,7 +83,7 @@ typedef enum {
 
 
 #ifndef HCAN_RX_MULTIPLE_FRAME_LIST_LENGTH
-#define HCAN_RX_MULTIPLE_FRAME_LIST_LENGTH (2)
+#define HCAN_RX_MULTIPLE_FRAME_LIST_LENGTH (1)
 #endif
 
 /* ------------------------------------------------------------------------ */

@@ -25,8 +25,8 @@
 #include "lib_list.h"
 #include "can.h"
 //#include "board.h"
-
-
+#include "usart.h"
+#include "main.h"
 /* 帧接收缓存：
 *   帧接收缓存通过链表来实现, 头插尾取
 * */
@@ -258,12 +258,22 @@ int8_t hcan_packet_transmit(hcan_priority_t priority,
  */
 __attribute__((weak)) int8_t hcan_msg_recv_notify(uint8_t prio, uint8_t dest, uint8_t src_id, uint8_t *data, uint16_t length)
 {
-	if(prio==1&&dest==2&&src_id==1)
-		hcan_packet_transmit(PRIORITY_CONTROL,DEV_CENTRAL_CONTROLER,DEV_MOTOR_CONTROLER,0,HCAN_FRAME_NORMAL,data,sizeof (data)+1);
-	
-	
-	
-	
+	printf("进入了回调函数\r\n");
+		uint16_t i;
+//	if(prio==1&&dest==2&&src_id==1)
+//	{if(length<=8)
+//		hcan_packet_transmit(PRIORITY_CONTROL,DEV_CENTRAL_CONTROLER,DEV_MOTOR_CONTROLER,0,HCAN_FRAME_NORMAL,data,sizeof (data)+1);
+//	else if(length>=8)
+//	  {
+			printf("多帧接收结束，串口打印\r\n");
+			for(i=0;i<=length;i++)
+			{
+			 printf("%x",data[i]);
+			
+			}
+//		}
+//	
+//	}
 	
     return 0;
 }

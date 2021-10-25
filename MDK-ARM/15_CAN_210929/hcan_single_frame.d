@@ -1,7 +1,8 @@
-15_can_210929\hcan_single_frame.o: hcan\src\hcan_single_frame.c
-15_can_210929\hcan_single_frame.o: hcan\src\hcan_private.h
+15_can_210929\hcan_single_frame.o: ..\Src\hcan_single_frame.c
+15_can_210929\hcan_single_frame.o: .\hcan\src\hcan_private.h
 15_can_210929\hcan_single_frame.o: .\hcan\api\hcan.h
 15_can_210929\hcan_single_frame.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+15_can_210929\hcan_single_frame.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 15_can_210929\hcan_single_frame.o: .\hcan\libs\lib_list.h
 15_can_210929\hcan_single_frame.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 15_can_210929\hcan_single_frame.o: .\hcan\libs\lib_crc.h
@@ -37,4 +38,3 @@
 15_can_210929\hcan_single_frame.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 15_can_210929\hcan_single_frame.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 15_can_210929\hcan_single_frame.o: ../Inc/usart.h
-15_can_210929\hcan_single_frame.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

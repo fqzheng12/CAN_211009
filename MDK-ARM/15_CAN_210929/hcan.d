@@ -1,7 +1,8 @@
-15_can_210929\hcan.o: hcan\src\hcan.c
-15_can_210929\hcan.o: hcan\src\hcan_private.h
+15_can_210929\hcan.o: ..\Src\hcan.c
+15_can_210929\hcan.o: .\hcan\src\hcan_private.h
 15_can_210929\hcan.o: .\hcan\api\hcan.h
 15_can_210929\hcan.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+15_can_210929\hcan.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 15_can_210929\hcan.o: .\hcan\libs\lib_list.h
 15_can_210929\hcan.o: .\hcan\libs\lib_crc.h
 15_can_210929\hcan.o: ../Inc/can.h
@@ -37,4 +38,3 @@
 15_can_210929\hcan.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 15_can_210929\hcan.o: ../Inc/usart.h
 15_can_210929\hcan.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-15_can_210929\hcan.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
