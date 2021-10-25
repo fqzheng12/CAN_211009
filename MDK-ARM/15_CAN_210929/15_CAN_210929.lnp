@@ -24,6 +24,11 @@
 "15_can_210929\stm32f4xx_hal_tim_ex.o"
 "15_can_210929\stm32f4xx_hal_uart.o"
 "15_can_210929\system_stm32f4xx.o"
+"15_can_210929\hcan.o"
+"15_can_210929\hcan_muti_frame.o"
+"15_can_210929\hcan_single_frame.o"
+"15_can_210929\lib_crc.o"
+"15_can_210929\lib_list.o"
 --library_type=microlib --strict --scatter "15_CAN_210929\15_CAN_210929.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

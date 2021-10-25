@@ -81,9 +81,9 @@
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
-            <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
-            <UserProg2Name></UserProg2Name>
+            <RunUserProg2>1</RunUserProg2>
+            <UserProg1Name>F:\work\04 code\CAN_211009\MDK-ARM\fromelf.exe  --bin -o  ../MDK-ARM/@L.bin  ../MDK-ARM/@L.axf</UserProg1Name>
+            <UserProg2Name>$K\ARM\ARMCC\bin\fromelf.exe --bin --output=@L.bin !L</UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopA1X>0</nStopA1X>
@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F405xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;.\hcan\api</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;.\hcan\api;.\hcan\libs;.\hcan\src</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -520,6 +520,46 @@
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/system_stm32f4xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hcan</GroupName>
+          <Files>
+            <File>
+              <FileName>hcan.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hcan\src\hcan.c</FilePath>
+            </File>
+            <File>
+              <FileName>hcan_muti_frame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hcan\src\hcan_muti_frame.c</FilePath>
+            </File>
+            <File>
+              <FileName>hcan_single_frame.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hcan\src\hcan_single_frame.c</FilePath>
+            </File>
+            <File>
+              <FileName>hcan_private.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\hcan\src\hcan_private.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>List_Lib</GroupName>
+          <Files>
+            <File>
+              <FileName>lib_crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hcan\libs\lib_crc.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_list.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hcan\libs\lib_list.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -66,8 +66,9 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	uint8_t Data[8]={0xAA,0x55};
-
+//	SCB->VTOR = 0x08010000U; //Vec
+	uint8_t Data[]={0xAA,0x55,0xAA,0x54,0xAA,0x53,0xAA,0x52,0xAA,0x51,0xAA,0x50,0xAA,0x51,0xAA,0x52,0xAA,0x53,0xAA,0x54,0xAA,0x55,};
+//  NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x10000);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -76,7 +77,8 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-   
+     /* 设置中断表起始地址 */
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -100,12 +102,15 @@ int main(void)
   {
     /* USER CODE END WHILE */
 //  hcan_driver_send_single_frame(0x12345,Data,4);
-	hcan_driver_send_multi_frame(0x12345,Data,4);
-		hcan_driver_query_bus_status();
-//	printf("*******************\r\n");
-		printf("can status is=%d\r\n",HAL_CAN_GetError(&hcan1));
-		HAL_Delay(500);
-    /* USER CODE BEGIN 3 */
+//	hcan_driver_send_multi_frame(0x12345,Data,4);
+//		hcan_driver_query_bus_status();
+//	printf("***************控制器****\r\n");
+//		printf("can status is=%d\r\n",HAL_CAN_GetError(&hcan1));
+		HAL_Delay(10);
+		
+//		hcan_packet_transmit(PRIORITY_STATUS,DEV_CENTRAL_CONTROLER,DEV_MOTOR_CONTROLER,1,HCAN_FRAME_NORMAL,Data,10);
+    hcan_loop();
+		/* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }

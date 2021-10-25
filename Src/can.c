@@ -21,7 +21,7 @@
 #include "can.h"
 
 /* USER CODE BEGIN 0 */
-
+//
 /* USER CODE END 0 */
 
 CAN_HandleTypeDef hcan1;
@@ -55,14 +55,15 @@ void MX_CAN1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN1_Init 2 */
-	hcan1_fliter_1.can_id=0x02;//只有控制器id的02可以收
-	hcan1_fliter_1.mask=0x3f;
+	hcan1_fliter_1.can_id=0x02<<6;//只有控制器id的02可以收
+	hcan1_fliter_1.mask=0xFC0;
 	hcan_driver_hw_init(&hcan1_fliter_1,0);
-	hcan1_fliter_2.can_id=0x3F;//广播消息也要收，过滤之间是或的关系
-	hcan1_fliter_2.mask=0x3f;
-	hcan_driver_hw_init(&hcan1_fliter_2,1);
+	hcan1_fliter_2.can_id=0x3F<<6;//广播消息也要收，过滤之间是或的关系
+	hcan1_fliter_2.mask=0xFC0;
+	hcan_init(&hcan1_fliter_2,1);//这个地方初始化了单多帧收发和链表
   HAL_CAN_Start(&hcan1);//启动CAN
 	//激活fifo0的数据接收
+
   if(HAL_CAN_ActivateNotification(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING)!=HAL_OK)
 {
     Error_Handler();
@@ -218,7 +219,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
         {
             printf("Rx_Data[%d]=%x\r\n",i,Rx_Data[i]);  
         }
-		hcan_driver_send_single_frame(ID,Rx_Data,Data_Len);
+//		hcan_driver_send_single_frame(ID,Rx_Data,Data_Len);
+		hcan_hw_frame_recv(ID,Rx_Data,Data_Len);
     }
 }
 
@@ -248,10 +250,10 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 				{
 					if(HAL_CAN_AddTxMessage(&hcan1,&TxHeader,data,(uint32_t*)CAN_TX_MAILBOX1)!=0)
 					return 1;
-					printf("邮箱1发送成功");
+					printf("控制器-邮箱1发送成功\r\n");
 				}
 			}
-			printf("邮箱0送成功");
+			printf("控制器-邮箱0送成功\r\n");
 			return 0;
 		}
 		return 0;
@@ -282,6 +284,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		if(HAL_CAN_AddTxMessage(&hcan1,&TxHeader,data,(uint32_t*)CAN_TX_MAILBOX2)!=0)//默认用第2邮箱发多帧
 			return 1;
 		else
+			printf("控制器-邮箱2送成功\r\n");
 			return 0;
 	}
 	return 0;	

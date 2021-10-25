@@ -3,11 +3,11 @@
 <title>Static Call Graph - [15_CAN_210929\15_CAN_210929.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image 15_CAN_210929\15_CAN_210929.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sat Oct 09 20:38:51 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Oct 25 15:50:18 2021
 <BR><P>
-<H3>Maximum Stack Usage =        184 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        252 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-main &rArr; SystemClock_Config &rArr; HAL_RCC_ClockConfig &rArr; HAL_RCC_GetSysClockFreq &rArr; __aeabi_uldivmod
+main &rArr; hcan_loop &rArr; hcan_frame_recv_handle &rArr; hcan_multi_frame_recv_handle &rArr; hcan_handle_recv_continuous_frame &rArr; hcan_msg_recv_notify &rArr; hcan_packet_transmit &rArr; hcan_single_packet_transmit &rArr; hcan_add_single_frame_list &rArr; list_insert
 <P>
 <H3>
 Mutually Recursive functions
@@ -122,7 +122,7 @@ Global Symbols
 <P><STRONG><a name="[5a]"></a>__main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry.o(.ARM.Collect$$$$00000000))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f405xx.o(.text)
 </UL>
-<P><STRONG><a name="[9e]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
+<P><STRONG><a name="[c4]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
 
 <P><STRONG><a name="[5c]"></a>_main_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
 <BR><BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
@@ -132,15 +132,15 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
-<P><STRONG><a name="[9f]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
+<P><STRONG><a name="[c5]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
 
-<P><STRONG><a name="[a0]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
+<P><STRONG><a name="[c6]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
 
-<P><STRONG><a name="[a1]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
+<P><STRONG><a name="[c7]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
 
-<P><STRONG><a name="[a2]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
+<P><STRONG><a name="[c8]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
 
-<P><STRONG><a name="[a3]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
+<P><STRONG><a name="[c9]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
 
 <P><STRONG><a name="[0]"></a>Reset_Handler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, startup_stm32f405xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f405xx.o(RESET)
@@ -385,29 +385,50 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetSysClockFreq
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
 </UL>
 
-<P><STRONG><a name="[62]"></a>__aeabi_memset</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[9a]"></a>__aeabi_memcpy</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, memcpya.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_hw_frame_recv
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_packet_transmit
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_frame_recv_handle
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_add_single_frame_list
+</UL>
+
+<P><STRONG><a name="[c2]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[ca]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text), UNUSED)
+
+<P><STRONG><a name="[62]"></a>__aeabi_memset</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, memseta.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_memset$wrapper
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
 
-<P><STRONG><a name="[a4]"></a>__aeabi_memset4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[cb]"></a>__aeabi_memset4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 
-<P><STRONG><a name="[a5]"></a>__aeabi_memset8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[cc]"></a>__aeabi_memset8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 
-<P><STRONG><a name="[61]"></a>__aeabi_memclr</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[61]"></a>__aeabi_memclr</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, memseta.o(.text))
 <BR><BR>[Calls]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
+</UL>
+<BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_packet_transmit
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_frame_timer_handle
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_frame_handle_init
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_handle_recv_continuous_frame
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_handle_flow_control
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_continuous_frame_transmit
 </UL>
 
 <P><STRONG><a name="[76]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_MspInit
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_handle_init
 </UL>
 
-<P><STRONG><a name="[a6]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[cd]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 
 <P><STRONG><a name="[63]"></a>_memset$wrapper</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, memseta.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
@@ -417,13 +438,13 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
 
-<P><STRONG><a name="[a7]"></a>_ll_shift_l</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, llshl.o(.text), UNUSED)
+<P><STRONG><a name="[ce]"></a>_ll_shift_l</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, llshl.o(.text), UNUSED)
 
 <P><STRONG><a name="[5f]"></a>__aeabi_llsr</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, llushr.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
 
-<P><STRONG><a name="[a8]"></a>_ll_ushift_r</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, llushr.o(.text), UNUSED)
+<P><STRONG><a name="[cf]"></a>_ll_ushift_r</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, llushr.o(.text), UNUSED)
 
 <P><STRONG><a name="[5d]"></a>__scatterload</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, init.o(.text))
 <BR><BR>[Calls]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main_after_scatterload
@@ -431,7 +452,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_main_scatterload
 </UL>
 
-<P><STRONG><a name="[a9]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
+<P><STRONG><a name="[d0]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
 
 <P><STRONG><a name="[4]"></a>BusFault_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.BusFault_Handler))
 <BR><BR>[Calls]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BusFault_Handler
@@ -441,14 +462,14 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f405xx.o(RESET)
 </UL>
 <P><STRONG><a name="[1e]"></a>CAN1_RX0_IRQHandler</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.CAN1_RX0_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = CAN1_RX0_IRQHandler &rArr; HAL_CAN_IRQHandler &rArr; HAL_CAN_RxFifo0MsgPendingCallback &rArr; hcan_driver_send_single_frame &rArr; __2printf
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = CAN1_RX0_IRQHandler &rArr; HAL_CAN_IRQHandler &rArr; HAL_CAN_RxFifo0MsgPendingCallback &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_IRQHandler
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f405xx.o(RESET)
 </UL>
 <P><STRONG><a name="[1f]"></a>CAN1_RX1_IRQHandler</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.CAN1_RX1_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = CAN1_RX1_IRQHandler &rArr; HAL_CAN_IRQHandler &rArr; HAL_CAN_RxFifo0MsgPendingCallback &rArr; hcan_driver_send_single_frame &rArr; __2printf
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = CAN1_RX1_IRQHandler &rArr; HAL_CAN_IRQHandler &rArr; HAL_CAN_RxFifo0MsgPendingCallback &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_IRQHandler
 </UL>
@@ -459,22 +480,22 @@ Global Symbols
 </UL>
 <P><STRONG><a name="[8e]"></a>Error_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, main.o(i.Error_Handler))
 <BR><BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_hw_init
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_UART5_Init
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_UART5_Init
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_CAN1_Init
 </UL>
 
-<P><STRONG><a name="[90]"></a>HAL_CAN_ActivateNotification</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, stm32f4xx_hal_can.o(i.HAL_CAN_ActivateNotification))
+<P><STRONG><a name="[91]"></a>HAL_CAN_ActivateNotification</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, stm32f4xx_hal_can.o(i.HAL_CAN_ActivateNotification))
 <BR><BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_CAN1_Init
 </UL>
 
-<P><STRONG><a name="[9c]"></a>HAL_CAN_AddTxMessage</STRONG> (Thumb, 200 bytes, Stack size 20 bytes, stm32f4xx_hal_can.o(i.HAL_CAN_AddTxMessage))
+<P><STRONG><a name="[a9]"></a>HAL_CAN_AddTxMessage</STRONG> (Thumb, 200 bytes, Stack size 20 bytes, stm32f4xx_hal_can.o(i.HAL_CAN_AddTxMessage))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = HAL_CAN_AddTxMessage
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_send_single_frame
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_send_multi_frame
+<BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_send_single_frame
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_send_multi_frame
 </UL>
 
-<P><STRONG><a name="[98]"></a>HAL_CAN_ConfigFilter</STRONG> (Thumb, 262 bytes, Stack size 8 bytes, stm32f4xx_hal_can.o(i.HAL_CAN_ConfigFilter))
+<P><STRONG><a name="[a6]"></a>HAL_CAN_ConfigFilter</STRONG> (Thumb, 262 bytes, Stack size 8 bytes, stm32f4xx_hal_can.o(i.HAL_CAN_ConfigFilter))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = HAL_CAN_ConfigFilter
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_hw_init
@@ -484,9 +505,8 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_IRQHandler
 </UL>
 
-<P><STRONG><a name="[9a]"></a>HAL_CAN_GetError</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_hal_can.o(i.HAL_CAN_GetError))
-<BR><BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_query_bus_status
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<P><STRONG><a name="[a8]"></a>HAL_CAN_GetError</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_hal_can.o(i.HAL_CAN_GetError))
+<BR><BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_query_bus_status
 </UL>
 
 <P><STRONG><a name="[7b]"></a>HAL_CAN_GetRxMessage</STRONG> (Thumb, 232 bytes, Stack size 12 bytes, stm32f4xx_hal_can.o(i.HAL_CAN_GetRxMessage))
@@ -495,11 +515,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_RxFifo0MsgPendingCallback
 </UL>
 
-<P><STRONG><a name="[65]"></a>HAL_CAN_IRQHandler</STRONG> (Thumb, 508 bytes, Stack size 40 bytes, stm32f4xx_hal_can.o(i.HAL_CAN_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = HAL_CAN_IRQHandler &rArr; HAL_CAN_RxFifo0MsgPendingCallback &rArr; hcan_driver_send_single_frame &rArr; __2printf
+<P><STRONG><a name="[a5]"></a>HAL_CAN_GetState</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, stm32f4xx_hal_can.o(i.HAL_CAN_GetState))
+<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_fault_reset
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_RxFifo0MsgPendingCallback
-<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_WakeUpFromRxMsgCallback
+
+<P><STRONG><a name="[65]"></a>HAL_CAN_IRQHandler</STRONG> (Thumb, 508 bytes, Stack size 40 bytes, stm32f4xx_hal_can.o(i.HAL_CAN_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = HAL_CAN_IRQHandler &rArr; HAL_CAN_RxFifo0MsgPendingCallback &rArr; __2printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_WakeUpFromRxMsgCallback
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_TxMailbox2CompleteCallback
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_TxMailbox2AbortCallback
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_TxMailbox1CompleteCallback
@@ -511,6 +534,7 @@ Global Symbols
 <LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_RxFifo1FullCallback
 <LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_RxFifo0FullCallback
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_ErrorCallback
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_RxFifo0MsgPendingCallback
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN1_RX1_IRQHandler
 <LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN1_RX0_IRQHandler
@@ -519,8 +543,8 @@ Global Symbols
 <P><STRONG><a name="[73]"></a>HAL_CAN_Init</STRONG> (Thumb, 282 bytes, Stack size 16 bytes, stm32f4xx_hal_can.o(i.HAL_CAN_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = HAL_CAN_Init &rArr; HAL_CAN_MspInit &rArr; HAL_GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_MspInit
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_MspInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_CAN1_Init
 </UL>
@@ -536,15 +560,19 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_Init
 </UL>
 
+<P><STRONG><a name="[a4]"></a>HAL_CAN_ResetError</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, stm32f4xx_hal_can.o(i.HAL_CAN_ResetError))
+<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_fault_reset
+</UL>
+
 <P><STRONG><a name="[6c]"></a>HAL_CAN_RxFifo0FullCallback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_hal_can.o(i.HAL_CAN_RxFifo0FullCallback))
 <BR><BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_IRQHandler
 </UL>
 
 <P><STRONG><a name="[6d]"></a>HAL_CAN_RxFifo0MsgPendingCallback</STRONG> (Thumb, 96 bytes, Stack size 56 bytes, can.o(i.HAL_CAN_RxFifo0MsgPendingCallback))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = HAL_CAN_RxFifo0MsgPendingCallback &rArr; hcan_driver_send_single_frame &rArr; __2printf
+<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = HAL_CAN_RxFifo0MsgPendingCallback &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_GetRxMessage
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_send_single_frame
+<BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_hw_frame_recv
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_GetRxMessage
 <LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_IRQHandler
@@ -623,7 +651,7 @@ Global Symbols
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_WaitOnFlagUntilTimeout
 </UL>
 
-<P><STRONG><a name="[92]"></a>HAL_IncTick</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_hal.o(i.HAL_IncTick))
+<P><STRONG><a name="[93]"></a>HAL_IncTick</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_hal.o(i.HAL_IncTick))
 <BR><BR>[Called By]<UL><LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
 </UL>
 
@@ -673,18 +701,18 @@ Global Symbols
 <P><STRONG><a name="[85]"></a>HAL_RCC_ClockConfig</STRONG> (Thumb, 288 bytes, Stack size 32 bytes, stm32f4xx_hal_rcc.o(i.HAL_RCC_ClockConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = HAL_RCC_ClockConfig &rArr; HAL_RCC_GetSysClockFreq &rArr; __aeabi_uldivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetSysClockFreq
+<BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetSysClockFreq
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
-<BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
+<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 </UL>
 
-<P><STRONG><a name="[95]"></a>HAL_RCC_GetPCLK1Freq</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_hal_rcc.o(i.HAL_RCC_GetPCLK1Freq))
+<P><STRONG><a name="[96]"></a>HAL_RCC_GetPCLK1Freq</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_hal_rcc.o(i.HAL_RCC_GetPCLK1Freq))
 <BR><BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
 </UL>
 
-<P><STRONG><a name="[94]"></a>HAL_RCC_GetPCLK2Freq</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_hal_rcc.o(i.HAL_RCC_GetPCLK2Freq))
+<P><STRONG><a name="[95]"></a>HAL_RCC_GetPCLK2Freq</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_hal_rcc.o(i.HAL_RCC_GetPCLK2Freq))
 <BR><BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
 </UL>
 
@@ -701,7 +729,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
-<BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
+<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 </UL>
 
 <P><STRONG><a name="[83]"></a>HAL_SYSTICK_Config</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, stm32f4xx_hal_cortex.o(i.HAL_SYSTICK_Config))
@@ -718,7 +746,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_UART5_Init
+<BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_UART5_Init
 </UL>
 
 <P><STRONG><a name="[89]"></a>HAL_UART_MspInit</STRONG> (Thumb, 118 bytes, Stack size 48 bytes, usart.o(i.HAL_UART_MspInit))
@@ -746,25 +774,27 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f405xx.o(RESET)
 </UL>
-<P><STRONG><a name="[8d]"></a>MX_CAN1_Init</STRONG> (Thumb, 104 bytes, Stack size 24 bytes, can.o(i.MX_CAN1_Init))
+<P><STRONG><a name="[8d]"></a>MX_CAN1_Init</STRONG> (Thumb, 106 bytes, Stack size 24 bytes, can.o(i.MX_CAN1_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = MX_CAN1_Init &rArr; HAL_CAN_Init &rArr; HAL_CAN_MspInit &rArr; HAL_GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_Start
+<BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_init
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_Start
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_Init
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_ActivateNotification
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_ActivateNotification
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_hw_init
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Error_Handler
 </UL>
-<BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_fault_reset
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[9d]"></a>MX_GPIO_Init</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, gpio.o(i.MX_GPIO_Init))
+<P><STRONG><a name="[c3]"></a>MX_GPIO_Init</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, gpio.o(i.MX_GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = MX_GPIO_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[91]"></a>MX_UART5_Init</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, usart.o(i.MX_UART5_Init))
+<P><STRONG><a name="[92]"></a>MX_UART5_Init</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, usart.o(i.MX_UART5_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = MX_UART5_Init &rArr; HAL_UART_Init &rArr; HAL_UART_MspInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
@@ -794,11 +824,11 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f405xx.o(RESET)
 </UL>
 <P><STRONG><a name="[9]"></a>SysTick_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.SysTick_Handler))
-<BR><BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_IncTick
+<BR><BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_IncTick
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f405xx.o(RESET)
 </UL>
-<P><STRONG><a name="[93]"></a>SystemClock_Config</STRONG> (Thumb, 140 bytes, Stack size 88 bytes, main.o(i.SystemClock_Config))
+<P><STRONG><a name="[94]"></a>SystemClock_Config</STRONG> (Thumb, 140 bytes, Stack size 88 bytes, main.o(i.SystemClock_Config))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = SystemClock_Config &rArr; HAL_RCC_ClockConfig &rArr; HAL_RCC_GetSysClockFreq &rArr; __aeabi_uldivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_OscConfig
@@ -808,7 +838,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[59]"></a>SystemInit</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, system_stm32f4xx.o(i.SystemInit))
+<P><STRONG><a name="[59]"></a>SystemInit</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, system_stm32f4xx.o(i.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f405xx.o(.text)
 </UL>
 <P><STRONG><a name="[5]"></a>UsageFault_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.UsageFault_Handler))
@@ -818,26 +848,33 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f405xx.o(RESET)
 </UL>
-<P><STRONG><a name="[96]"></a>__0printf$5</STRONG> (Thumb, 22 bytes, Stack size 24 bytes, printf5.o(i.__0printf$5), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
+<P><STRONG><a name="[97]"></a>__0printf$5</STRONG> (Thumb, 22 bytes, Stack size 24 bytes, printf5.o(i.__0printf$5), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
 </UL>
 
-<P><STRONG><a name="[aa]"></a>__1printf$5</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf5.o(i.__0printf$5), UNUSED)
+<P><STRONG><a name="[d1]"></a>__1printf$5</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf5.o(i.__0printf$5), UNUSED)
 
 <P><STRONG><a name="[7a]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf5.o(i.__0printf$5))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_send_single_frame
+<BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_send_single_frame
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_send_multi_frame
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_query_bus_status
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_RxFifo0MsgPendingCallback
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_query_bus_status
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[ab]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
+<P><STRONG><a name="[d2]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
 
-<P><STRONG><a name="[ac]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
+<P><STRONG><a name="[d3]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
 
-<P><STRONG><a name="[ad]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
+<P><STRONG><a name="[d4]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
+
+<P><STRONG><a name="[b1]"></a>crc16_calc</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, lib_crc.o(i.crc16_calc))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = crc16_calc
+</UL>
+<BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_packet_transmit
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_handle_recv_continuous_frame
+</UL>
 
 <P><STRONG><a name="[5b]"></a>fputc</STRONG> (Thumb, 20 bytes, Stack size 16 bytes, usart.o(i.fputc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = fputc &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
@@ -846,54 +883,282 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> printf5.o(i.__0printf$5)
 </UL>
+<P><STRONG><a name="[af]"></a>hcan_ack_fc_notify</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, hcan.o(i.hcan_ack_fc_notify))
+<BR><BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_recv_handle
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_handle_flow_control
+</UL>
+
+<P><STRONG><a name="[99]"></a>hcan_add_single_frame_list</STRONG> (Thumb, 194 bytes, Stack size 32 bytes, hcan_single_frame.o(i.hcan_add_single_frame_list))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = hcan_add_single_frame_list &rArr; list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_insert
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+</UL>
+<BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_packet_transmit
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_recv_handle
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_can_send_flow_control_frame
+</UL>
+
+<P><STRONG><a name="[a3]"></a>hcan_driver_fault_reset</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, can.o(i.hcan_driver_fault_reset))
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = hcan_driver_fault_reset &rArr; MX_CAN1_Init &rArr; HAL_CAN_Init &rArr; HAL_CAN_MspInit &rArr; HAL_GPIO_Init
+</UL>
+<BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_ResetError
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_GetState
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_CAN1_Init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_hw_bus_off_handle
+</UL>
+
 <P><STRONG><a name="[8f]"></a>hcan_driver_hw_init</STRONG> (Thumb, 76 bytes, Stack size 48 bytes, can.o(i.hcan_driver_hw_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = hcan_driver_hw_init &rArr; HAL_CAN_ConfigFilter
 </UL>
-<BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_ConfigFilter
+<BR>[Calls]<UL><LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_ConfigFilter
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Error_Handler
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_CAN1_Init
+<BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_init
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_CAN1_Init
 </UL>
 
-<P><STRONG><a name="[99]"></a>hcan_driver_query_bus_status</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, can.o(i.hcan_driver_query_bus_status))
+<P><STRONG><a name="[a7]"></a>hcan_driver_query_bus_status</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, can.o(i.hcan_driver_query_bus_status))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = hcan_driver_query_bus_status &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_GetError
+<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_GetError
 <LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_hw_bus_off_handle
 </UL>
 
-<P><STRONG><a name="[9b]"></a>hcan_driver_send_multi_frame</STRONG> (Thumb, 54 bytes, Stack size 32 bytes, can.o(i.hcan_driver_send_multi_frame))
-<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = hcan_driver_send_multi_frame &rArr; HAL_CAN_AddTxMessage
+<P><STRONG><a name="[9f]"></a>hcan_driver_send_multi_frame</STRONG> (Thumb, 58 bytes, Stack size 32 bytes, can.o(i.hcan_driver_send_multi_frame))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = hcan_driver_send_multi_frame &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_AddTxMessage
+<BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_AddTxMessage
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_frame_transmit
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_continuous_frame_transmit
 </UL>
 
-<P><STRONG><a name="[7c]"></a>hcan_driver_send_single_frame</STRONG> (Thumb, 86 bytes, Stack size 40 bytes, can.o(i.hcan_driver_send_single_frame))
+<P><STRONG><a name="[aa]"></a>hcan_driver_send_single_frame</STRONG> (Thumb, 86 bytes, Stack size 40 bytes, can.o(i.hcan_driver_send_single_frame))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = hcan_driver_send_single_frame &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_AddTxMessage
+<BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_AddTxMessage
 <LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_transmit
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_hw_bus_off_handle
+</UL>
+
+<P><STRONG><a name="[7c]"></a>hcan_hw_frame_recv</STRONG> (Thumb, 116 bytes, Stack size 16 bytes, hcan.o(i.hcan_hw_frame_recv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = hcan_hw_frame_recv &rArr; list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_insert
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_RxFifo0MsgPendingCallback
 </UL>
 
-<P><STRONG><a name="[58]"></a>main</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = main &rArr; SystemClock_Config &rArr; HAL_RCC_ClockConfig &rArr; HAL_RCC_GetSysClockFreq &rArr; __aeabi_uldivmod
+<P><STRONG><a name="[90]"></a>hcan_init</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, hcan.o(i.hcan_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = hcan_init &rArr; hcan_driver_hw_init &rArr; HAL_CAN_ConfigFilter
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_send_multi_frame
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_query_bus_status
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_UART5_Init
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
+<BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_hw_init
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_init
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_handle_init
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_frame_handle_init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_CAN1_Init
+</UL>
+
+<P><STRONG><a name="[b8]"></a>hcan_loop</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, hcan.o(i.hcan_loop))
+<BR><BR>[Stack]<UL><LI>Max Depth = 228<LI>Call Chain = hcan_loop &rArr; hcan_frame_recv_handle &rArr; hcan_multi_frame_recv_handle &rArr; hcan_handle_recv_continuous_frame &rArr; hcan_msg_recv_notify &rArr; hcan_packet_transmit &rArr; hcan_single_packet_transmit &rArr; hcan_add_single_frame_list &rArr; list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_transmit
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_timer_handle
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_frame_transmit
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_frame_timer_handle
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_hw_bus_off_handle
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_frame_recv_handle
+</UL>
+<BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[9d]"></a>hcan_msg_error_handle_notify</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, hcan.o(i.hcan_msg_error_handle_notify))
+<BR><BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_transmit
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_recv_handle
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_hw_bus_off_handle
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_handle_flow_control
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_continuous_frame_transmit
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_can_send_flow_control_frame
+</UL>
+
+<P><STRONG><a name="[b2]"></a>hcan_msg_recv_notify</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, hcan.o(i.hcan_msg_recv_notify))
+<BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = hcan_msg_recv_notify &rArr; hcan_packet_transmit &rArr; hcan_single_packet_transmit &rArr; hcan_add_single_frame_list &rArr; list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_packet_transmit
+</UL>
+<BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_recv_handle
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_handle_recv_continuous_frame
+</UL>
+
+<P><STRONG><a name="[b5]"></a>hcan_multi_frame_handle_init</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, hcan_muti_frame.o(i.hcan_multi_frame_handle_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = hcan_multi_frame_handle_init
+</UL>
+<BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_init
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_hw_bus_off_handle
+</UL>
+
+<P><STRONG><a name="[ad]"></a>hcan_multi_frame_recv_handle</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, hcan_muti_frame.o(i.hcan_multi_frame_recv_handle))
+<BR><BR>[Stack]<UL><LI>Max Depth = 172<LI>Call Chain = hcan_multi_frame_recv_handle &rArr; hcan_handle_recv_continuous_frame &rArr; hcan_msg_recv_notify &rArr; hcan_packet_transmit &rArr; hcan_single_packet_transmit &rArr; hcan_add_single_frame_list &rArr; list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_handle_recv_first_frame
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_handle_recv_continuous_frame
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_adjust_send_parameter
+</UL>
+<BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_frame_recv_handle
+</UL>
+
+<P><STRONG><a name="[bc]"></a>hcan_multi_frame_timer_handle</STRONG> (Thumb, 180 bytes, Stack size 32 bytes, hcan_muti_frame.o(i.hcan_multi_frame_timer_handle))
+<BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = hcan_multi_frame_timer_handle &rArr; hcan_can_send_flow_control_frame &rArr; hcan_add_single_frame_list &rArr; list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_can_send_flow_control_frame
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_loop
+</UL>
+
+<P><STRONG><a name="[ba]"></a>hcan_multi_frame_transmit</STRONG> (Thumb, 180 bytes, Stack size 24 bytes, hcan_muti_frame.o(i.hcan_multi_frame_transmit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = hcan_multi_frame_transmit &rArr; hcan_continuous_frame_transmit &rArr; hcan_driver_send_multi_frame &rArr; __2printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_send_multi_frame
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_handle_flow_control
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_continuous_frame_transmit
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_loop
+</UL>
+
+<P><STRONG><a name="[bf]"></a>hcan_multi_packet_transmit</STRONG> (Thumb, 208 bytes, Stack size 32 bytes, hcan_muti_frame.o(i.hcan_multi_packet_transmit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = hcan_multi_packet_transmit &rArr; crc16_calc
+</UL>
+<BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;crc16_calc
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_packet_is_transmiting
+</UL>
+<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_packet_transmit
+</UL>
+
+<P><STRONG><a name="[c0]"></a>hcan_packet_is_transmiting</STRONG> (Thumb, 70 bytes, Stack size 16 bytes, hcan_muti_frame.o(i.hcan_packet_is_transmiting))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = hcan_packet_is_transmiting
+</UL>
+<BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_packet_transmit
+</UL>
+
+<P><STRONG><a name="[bd]"></a>hcan_packet_transmit</STRONG> (Thumb, 74 bytes, Stack size 32 bytes, hcan.o(i.hcan_packet_transmit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 100<LI>Call Chain = hcan_packet_transmit &rArr; hcan_single_packet_transmit &rArr; hcan_add_single_frame_list &rArr; list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_packet_transmit
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_packet_transmit
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_msg_recv_notify
+</UL>
+
+<P><STRONG><a name="[b6]"></a>hcan_single_frame_handle_init</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, hcan_single_frame.o(i.hcan_single_frame_handle_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = hcan_single_frame_handle_init
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_init
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+</UL>
+<BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_init
+</UL>
+
+<P><STRONG><a name="[ac]"></a>hcan_single_frame_recv_handle</STRONG> (Thumb, 116 bytes, Stack size 32 bytes, hcan_single_frame.o(i.hcan_single_frame_recv_handle))
+<BR><BR>[Stack]<UL><LI>Max Depth = 148<LI>Call Chain = hcan_single_frame_recv_handle &rArr; hcan_msg_recv_notify &rArr; hcan_packet_transmit &rArr; hcan_single_packet_transmit &rArr; hcan_add_single_frame_list &rArr; list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_msg_recv_notify
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_msg_error_handle_notify
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_ack_fc_notify
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_delete_resend_frame
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_add_single_frame_list
+</UL>
+<BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_frame_recv_handle
+</UL>
+
+<P><STRONG><a name="[bb]"></a>hcan_single_frame_timer_handle</STRONG> (Thumb, 78 bytes, Stack size 32 bytes, hcan_single_frame.o(i.hcan_single_frame_timer_handle))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = hcan_single_frame_timer_handle &rArr; list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_insert
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_delete
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_count
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_loop
+</UL>
+
+<P><STRONG><a name="[b9]"></a>hcan_single_frame_transmit</STRONG> (Thumb, 186 bytes, Stack size 24 bytes, hcan_single_frame.o(i.hcan_single_frame_transmit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = hcan_single_frame_transmit &rArr; hcan_driver_send_single_frame &rArr; __2printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_send_single_frame
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_msg_error_handle_notify
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_insert
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_delete
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_count
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_loop
+</UL>
+
+<P><STRONG><a name="[c1]"></a>hcan_single_packet_transmit</STRONG> (Thumb, 24 bytes, Stack size 32 bytes, hcan_single_frame.o(i.hcan_single_packet_transmit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = hcan_single_packet_transmit &rArr; hcan_add_single_frame_list &rArr; list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_add_single_frame_list
+</UL>
+<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_packet_transmit
+</UL>
+
+<P><STRONG><a name="[a1]"></a>list_count</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, lib_list.o(i.list_count))
+<BR><BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_transmit
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_timer_handle
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_frame_recv_handle
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_delete_resend_frame
+</UL>
+
+<P><STRONG><a name="[a2]"></a>list_delete</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, lib_list.o(i.list_delete))
+<BR><BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_transmit
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_timer_handle
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_frame_recv_handle
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_delete_resend_frame
+</UL>
+
+<P><STRONG><a name="[b7]"></a>list_init</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, lib_list.o(i.list_init))
+<BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_init
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_insert
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_delete
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_handle_init
+</UL>
+
+<P><STRONG><a name="[9b]"></a>list_insert</STRONG> (Thumb, 30 bytes, Stack size 4 bytes, lib_list.o(i.list_insert))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_hw_frame_recv
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_transmit
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_timer_handle
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_add_single_frame_list
+</UL>
+
+<P><STRONG><a name="[58]"></a>main</STRONG> (Thumb, 44 bytes, Stack size 24 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 252<LI>Call Chain = main &rArr; hcan_loop &rArr; hcan_frame_recv_handle &rArr; hcan_multi_frame_recv_handle &rArr; hcan_handle_recv_continuous_frame &rArr; hcan_msg_recv_notify &rArr; hcan_packet_transmit &rArr; hcan_single_packet_transmit &rArr; hcan_add_single_frame_list &rArr; list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_loop
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_UART5_Init
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_CAN1_Init
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_GetError
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL><P>
@@ -908,8 +1173,8 @@ Local Symbols
 <P><STRONG><a name="[8a]"></a>UART_SetConfig</STRONG> (Thumb, 258 bytes, Stack size 16 bytes, stm32f4xx_hal_uart.o(i.UART_SetConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = UART_SetConfig &rArr; __aeabi_uldivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK2Freq
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK1Freq
+<BR>[Calls]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK2Freq
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK1Freq
 <LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
 <BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
@@ -923,10 +1188,99 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
 </UL>
 
-<P><STRONG><a name="[97]"></a>_printf_core</STRONG> (Thumb, 658 bytes, Stack size 104 bytes, printf5.o(i._printf_core), UNUSED)
+<P><STRONG><a name="[ab]"></a>hcan_frame_recv_handle</STRONG> (Thumb, 110 bytes, Stack size 48 bytes, hcan.o(i.hcan_frame_recv_handle))
+<BR><BR>[Stack]<UL><LI>Max Depth = 220<LI>Call Chain = hcan_frame_recv_handle &rArr; hcan_multi_frame_recv_handle &rArr; hcan_handle_recv_continuous_frame &rArr; hcan_msg_recv_notify &rArr; hcan_packet_transmit &rArr; hcan_single_packet_transmit &rArr; hcan_add_single_frame_list &rArr; list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_delete
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_count
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_recv_handle
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_frame_recv_handle
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_loop
+</UL>
+
+<P><STRONG><a name="[b4]"></a>hcan_hw_bus_off_handle</STRONG> (Thumb, 82 bytes, Stack size 32 bytes, hcan.o(i.hcan_hw_bus_off_handle))
+<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = hcan_hw_bus_off_handle &rArr; hcan_driver_fault_reset &rArr; MX_CAN1_Init &rArr; HAL_CAN_Init &rArr; HAL_CAN_MspInit &rArr; HAL_GPIO_Init
+</UL>
+<BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_send_single_frame
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_query_bus_status
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_fault_reset
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_msg_error_handle_notify
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_frame_handle_init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_loop
+</UL>
+
+<P><STRONG><a name="[be]"></a>hcan_adjust_send_parameter</STRONG> (Thumb, 132 bytes, Stack size 16 bytes, hcan_muti_frame.o(i.hcan_adjust_send_parameter))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = hcan_adjust_send_parameter
+</UL>
+<BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_frame_recv_handle
+</UL>
+
+<P><STRONG><a name="[9c]"></a>hcan_can_send_flow_control_frame</STRONG> (Thumb, 70 bytes, Stack size 48 bytes, hcan_muti_frame.o(i.hcan_can_send_flow_control_frame))
+<BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = hcan_can_send_flow_control_frame &rArr; hcan_add_single_frame_list &rArr; list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_msg_error_handle_notify
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_add_single_frame_list
+</UL>
+<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_frame_timer_handle
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_handle_recv_first_frame
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_handle_recv_continuous_frame
+</UL>
+
+<P><STRONG><a name="[9e]"></a>hcan_continuous_frame_transmit</STRONG> (Thumb, 292 bytes, Stack size 16 bytes, hcan_muti_frame.o(i.hcan_continuous_frame_transmit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = hcan_continuous_frame_transmit &rArr; hcan_driver_send_multi_frame &rArr; __2printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_driver_send_multi_frame
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_msg_error_handle_notify
+<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_frame_transmit
+</UL>
+
+<P><STRONG><a name="[ae]"></a>hcan_handle_flow_control</STRONG> (Thumb, 196 bytes, Stack size 24 bytes, hcan_muti_frame.o(i.hcan_handle_flow_control))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = hcan_handle_flow_control
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_msg_error_handle_notify
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_ack_fc_notify
+<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_frame_transmit
+</UL>
+
+<P><STRONG><a name="[b0]"></a>hcan_handle_recv_continuous_frame</STRONG> (Thumb, 342 bytes, Stack size 48 bytes, hcan_muti_frame.o(i.hcan_handle_recv_continuous_frame))
+<BR><BR>[Stack]<UL><LI>Max Depth = 164<LI>Call Chain = hcan_handle_recv_continuous_frame &rArr; hcan_msg_recv_notify &rArr; hcan_packet_transmit &rArr; hcan_single_packet_transmit &rArr; hcan_add_single_frame_list &rArr; list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_msg_recv_notify
+<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;crc16_calc
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_can_send_flow_control_frame
+</UL>
+<BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_frame_recv_handle
+</UL>
+
+<P><STRONG><a name="[b3]"></a>hcan_handle_recv_first_frame</STRONG> (Thumb, 148 bytes, Stack size 32 bytes, hcan_muti_frame.o(i.hcan_handle_recv_first_frame))
+<BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = hcan_handle_recv_first_frame &rArr; hcan_can_send_flow_control_frame &rArr; hcan_add_single_frame_list &rArr; list_insert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_can_send_flow_control_frame
+</UL>
+<BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_multi_frame_recv_handle
+</UL>
+
+<P><STRONG><a name="[a0]"></a>hcan_delete_resend_frame</STRONG> (Thumb, 102 bytes, Stack size 16 bytes, hcan_single_frame.o(i.hcan_delete_resend_frame))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = hcan_delete_resend_frame
+</UL>
+<BR>[Calls]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_delete
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_count
+</UL>
+<BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hcan_single_frame_recv_handle
+</UL>
+
+<P><STRONG><a name="[98]"></a>_printf_core</STRONG> (Thumb, 658 bytes, Stack size 104 bytes, printf5.o(i._printf_core), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
-<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0printf$5
+<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0printf$5
 </UL>
 <P>
 <H3>
