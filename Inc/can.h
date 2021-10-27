@@ -27,7 +27,6 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-
 /* USER CODE BEGIN Includes */
 #include "stdint.h"
 #include "hcan.h"
@@ -38,7 +37,7 @@ extern "C" {
 
 extern CAN_HandleTypeDef hcan1;
 
-/* USER CODE BEGIN Private defines *///用户代码开始
+/* USER CODE BEGIN Private defines */
 
 
 /**
@@ -109,12 +108,7 @@ extern int8_t hcan_driver_fault_reset(void);
 
 
 
-/* USER CODE END Private defines *///用户代码结束
-
-
-
-
-
+/* USER CODE END Private defines */
 
 void MX_CAN1_Init(void);
 

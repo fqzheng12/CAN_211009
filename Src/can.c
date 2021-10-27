@@ -133,7 +133,7 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
   }
 }
 
-/* USER CODE BEGIN 1 *///用户代码开始
+/* USER CODE BEGIN 1 */
    
 
 
@@ -331,6 +331,6 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 
 
 
-/* USER CODE END 1 *///用户代码结束
+/* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

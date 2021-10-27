@@ -29,10 +29,13 @@
 15_can_210929\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
 15_can_210929\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 15_can_210929\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+15_can_210929\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+15_can_210929\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 15_can_210929\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 15_can_210929\main.o: ../Inc/can.h
 15_can_210929\main.o: .\hcan\api\hcan.h
 15_can_210929\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 15_can_210929\main.o: ../Inc/usart.h
 15_can_210929\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+15_can_210929\main.o: ../Inc/tim.h
 15_can_210929\main.o: ../Inc/gpio.h

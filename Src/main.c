@@ -20,6 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "can.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -67,7 +68,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 //	SCB->VTOR = 0x08010000U; //Vec
-	uint8_t Data[]={0xAA,0x55,0xAA,0x54,0xAA,0x53,0xAA,0x52,0xAA,0x51,0xAA,0x50,0xAA,0x51,0xAA,0x52,0xAA,0x53,0xAA,0x54,0xAA,0x55,};
+//	uint8_t Data[]={0xAA,0x55,0xAA,0x54,0xAA,0x53,0xAA,0x52,0xAA,0x51,0xAA,0x50,0xAA,0x51,0xAA,0x52,0xAA,0x53,0xAA,0x54,0xAA,0x55,};
 //  NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x10000);
   /* USER CODE END 1 */
 
@@ -92,6 +93,7 @@ int main(void)
   MX_GPIO_Init();
   MX_CAN1_Init();
   MX_UART5_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -100,17 +102,18 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
-//  hcan_driver_send_single_frame(0x12345,Data,4);
+		//  hcan_driver_send_single_frame(0x12345,Data,4);
 //	hcan_driver_send_multi_frame(0x12345,Data,4);
 //		hcan_driver_query_bus_status();
 //	printf("***************¿ØÖÆÆ÷****\r\n");
 //		printf("can status is=%d\r\n",HAL_CAN_GetError(&hcan1));
-		HAL_Delay(10);
-		
-//		hcan_packet_transmit(PRIORITY_STATUS,DEV_CENTRAL_CONTROLER,DEV_MOTOR_CONTROLER,1,HCAN_FRAME_NORMAL,Data,10);
-    hcan_loop();
-		/* USER CODE BEGIN 3 */
+//		HAL_Delay(10);
+//		
+////		hcan_packet_transmit(PRIORITY_STATUS,DEV_CENTRAL_CONTROLER,DEV_MOTOR_CONTROLER,1,HCAN_FRAME_NORMAL,Data,10);
+//    hcan_loop();
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
@@ -151,7 +154,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV4;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
   {

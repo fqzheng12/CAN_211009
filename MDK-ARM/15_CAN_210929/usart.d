@@ -30,6 +30,8 @@
 15_can_210929\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
 15_can_210929\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 15_can_210929\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+15_can_210929\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+15_can_210929\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 15_can_210929\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 15_can_210929\usart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 15_can_210929\usart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
