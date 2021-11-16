@@ -17,23 +17,35 @@ Library Manager: ArmAr.exe V5.06 update 6 (build 750)
 Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
 CPU DLL:         SARMCM3.DLL V5.25.2.0
 Dialog DLL:      DCM.DLL V1.17.1.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.1.0
+Target DLL:      Segger\JL2CM3.dll V2.99.29.0
 Dialog DLL:      TCM.DLL V1.35.1.0
  
 <h2>Project:</h2>
 F:\work\04 code\CAN_211009\MDK-ARM\15_CAN_210929.uvprojx
-Project File Date:  10/27/2021
+Project File Date:  11/10/2021
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target '15_CAN_210929'
 compiling main.c...
-compiling tim.c...
+../Src/main.c(123): warning:  #191-D: type qualifier is meaningless on cast type
+  		printf("取地址上第一个的数据:%x\r\n",(__IO uint32_t)(SCB->ICSR));
+../Src/main.c(75): warning:  #177-D: variable "Data"  was declared but never referenced
+  	uint8_t Data[]={0xAA,0x55,0xAA,0x54,0xAA,0x53,0xAA,0x52,0xAA,0x51,0xAA,0x50,0xAA,0x51,0xAA,0x52,0xAA,0x53,0xAA,0x54,0xAA,0x55,};
+../Src/main.c: 2 warnings, 0 errors
+compiling hcan.c...
+..\Src\hcan.c(119): warning:  #177-D: variable "i"  was declared but never referenced
+      int i;
+..\Src\hcan.c(265): warning:  #550-D: variable "ramsource"  was set but never used
+    	  uint32_t ramsource[64];
+..\Src\hcan.c(266): warning:  #177-D: variable "Data"  was declared but never referenced
+  	uint8_t Data[]={0xAA,0x55,0xAA,0x54,0xAA,0x53,0xAA,0x52,0xAA,0x51,0xAA,0x50,0xAA,0x51,0xAA,0x52,0xAA,0x53,0xAA,0x54,0xAA,0x55,};
+..\Src\hcan.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=11486 RO-data=450 RW-data=36 ZI-data=11140  
+Program Size: Code=13056 RO-data=448 RW-data=44 ZI-data=11172  
 FromELF: creating hex file...
 After Build - User command #2: C:\Keil_v5\\ARM\ARMCC\bin\fromelf.exe --bin --output=15_CAN_210929.bin 15_CAN_210929\15_CAN_210929.axf
-"15_CAN_210929\15_CAN_210929.axf" - 0 Error(s), 0 Warning(s).
+"15_CAN_210929\15_CAN_210929.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 

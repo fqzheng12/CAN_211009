@@ -194,7 +194,7 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 //中断接收的回调函数
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
-    printf("HAL_CAN_RxFifo0MsgPendingCallback\r\n");
+//    printf("HAL_CAN_RxFifo0MsgPendingCallback\r\n");
     CAN_RxHeaderTypeDef CAN_RxHeader;
     HAL_StatusTypeDef HAL_Retval;
     uint8_t Rx_Data[8];
@@ -213,12 +213,12 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
         {
             ID = CAN_RxHeader.StdId;
         }
-        printf("id:%x\r\n",ID);
-        printf("Data_Len:%d\r\n",Data_Len);
-        for(i=0;i<Data_Len;i++)
-        {
-            printf("Rx_Data[%d]=%x\r\n",i,Rx_Data[i]);  
-        }
+//        printf("id:%x\r\n",ID);
+//        printf("Data_Len:%d\r\n",Data_Len);
+//        for(i=0;i<Data_Len;i++)
+//        {
+//            printf("Rx_Data[%d]=%x\r\n",i,Rx_Data[i]);  
+//        }
 //		hcan_driver_send_single_frame(ID,Rx_Data,Data_Len);
 		hcan_hw_frame_recv(ID,Rx_Data,Data_Len);
     }
@@ -253,7 +253,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 					printf("控制器-邮箱1发送成功\r\n");
 				}
 			}
-			printf("控制器-邮箱0送成功\r\n");
+//			printf("控制器-邮箱0送成功\r\n");
 			return 0;
 		}
 		return 0;

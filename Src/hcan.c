@@ -27,6 +27,8 @@
 //#include "board.h"
 #include "usart.h"
 #include "main.h"
+#include "flash_if.h"
+#include "tim.h"
 /* 帧接收缓存：
 *   帧接收缓存通过链表来实现, 头插尾取
 * */
@@ -34,6 +36,7 @@ static LIST_DEFINE(recv_frame_head);
 static hcan_recv_frame_t hcan_recv_frame_buffer[HCAN_RECV_BUFFER_LEN];
 
 static uint8_t hcan_bus_off_status = 0;
+extern uint8_t jump_flag;
 /**
 * @brief 检测当前总线是否正常或已经恢复
  * @return int8_t
@@ -258,23 +261,120 @@ int8_t hcan_packet_transmit(hcan_priority_t priority,
  */
 __attribute__((weak)) int8_t hcan_msg_recv_notify(uint8_t prio, uint8_t dest, uint8_t src_id, uint8_t *data, uint16_t length)
 {
-	printf("进入了回调函数\r\n");
-		uint16_t i;
-//	if(prio==1&&dest==2&&src_id==1)
-//	{if(length<=8)
-//		hcan_packet_transmit(PRIORITY_CONTROL,DEV_CENTRAL_CONTROLER,DEV_MOTOR_CONTROLER,0,HCAN_FRAME_NORMAL,data,sizeof (data)+1);
-//	else if(length>=8)
+		int i,a;
+  	  uint32_t ramsource[64];
+	uint8_t Data[]={0xAA,0x55,0xAA,0x54,0xAA,0x53,0xAA,0x52,0xAA,0x51,0xAA,0x50,0xAA,0x51,0xAA,0x52,0xAA,0x53,0xAA,0x54,0xAA,0x55,};
+
+//	else if(lengt
 //	  {
-			printf("多帧接收结束，串口打印\r\n");
-			for(i=0;i<=length;i++)
-			{
-			 printf("%x",data[i]);
-			
-			}
+//			printf("多帧接收结束，串口打印\r\n");
+//			for(i=0;i<=length;i++)
+//			{
+//			 printf("%x",data[i]);
+//			
+//			}
 //		}
 //	
 //	}
+	if(data[0]==0xfe)
+	{
+		
+//	printf("跳转APP运行\r\n");
+//    MX_TIM2_Init();
+//		  MX_CAN1_Init();
+//		HAL_CAN_MspDeInit(&hcan1);
+//		HAL_UART_MspDeInit(&huart5);
+//		HAL_TIM_Base_MspDeInit(&htim2);
+//		HAL_NVIC_ClearPendingIRQ(TIM2_IRQn);
+//		HAL_DeInit();
+////		HAL_FLASH_Lock();
+////		NVIC_SystemReset();
+////		HAL_NVIC_DisableIRQ(CAN1_RX1_IRQn);
+////		HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
+////		HAL_NVIC_DisableIRQ(TIM3_IRQn);
+//		HAL_NVIC_DisableIRQ(SysTick_IRQn);
+//	HAL_NVIC_ClearPendingIRQ(SysTick_IRQn);
+////		NVIC_SystemReset();
+////    __disable_irq();  /关闭总中断
+//////		__disable_irq();
+////		 /*
+////        Reset of all peripherals  
+////        这些外设关闭非常重要，否则不能够正常实现程序跳转功能，切记切记
+////        */
+////        __APB1_FORCE_RESET();
+////        __APB1_RELEASE_RESET();
+////        __APB2_FORCE_RESET();
+////        __APB2_RELEASE_RESET();
+////        
+////        __AHB1_FORCE_RESET();
+////        __AHB1_RELEASE_RESET();   
+////        
+////        __AHB2_FORCE_RESET();
+////        __AHB2_RELEASE_RESET();  
+////        
+////        __AHB3_FORCE_RESET();
+////        __AHB3_RELEASE_RESET();        
+
+////        HAL_RCC_DeInit();   
+//				SysTick->CTRL  &= ~SysTick_CTRL_TICKINT_Msk;   // 关闭滴答定时器中断
+//    SysTick->VAL = 0;
+//    SysTick->LOAD = 0;   
+////    __DSB(); 
+//	SCB->ICSR |=0x02000000U;
+//	SCB->AIRCR =0xFA050300U;
+////	  __DSB(); 
+//	Jump2APP(APPLICATION_ADDRESS);
+  jump_flag=1;
+	}
+	if(data[0]==0x80)
+	{
+//		printf("进入升级数据写入flash\r\n");		
 	
+	__IO  uint32_t flashdestination ;
+
+  for(i=0;i<=(length-6)/4;i++)
+	ramsource[i]=(((uint32_t)data[4*i+6])<<24)|(((uint32_t)data[4*i+7])<<16)|(((uint32_t)data[4*i+8])<<8)|((uint32_t)data[4*i+9]);
+
+		
+
+printf("数据包总长度为%d\r\n",length );
+
+		flashdestination=APPLICATION_ADDRESS|((uint32_t)(data[4]<<8));//取地址,进行偏移
+		printf("偏移地址:%d,%d\r\n",((uint32_t)(data[4]<<8)),data[4]);
+//		if(((data[4]*256)%1024)==0)//当偏移地址是1k的整数倍
+//			 ramsource = (uint32_t) & data[6];
+//		for(i=0;i<64;i++)
+//	  {
+//			ramsource[i]=(((uint32_t)data[4*i+6])<<24)|(((uint32_t)data[4*i+7])<<16)|(((uint32_t)data[4*i+8])<<8)|((uint32_t)data[4*i+9]);
+//		}
+//		ramsource = (uint32_t)( & data[6]);//取数据地址
+//	printf("初始地址的值为：%x\r\n",ramsource[0]);
+//	if(((data[4]*256)%4096)==0)
+//	{  	if(FLASH_If_Erase(flashdestination)==0)
+//	    printf("***************用户flash擦除成功****\r\n");//擦除了内存区40k的数据
+//	}
+//	else
+//    printf("***************用户flash擦除失败****\r\n");
+		  FLASH_If_Init();//每次写之前都必须清标志位，不然不成功
+		a=FLASH_If_Write(flashdestination, (uint32_t*)&data[6],(length-6)/4);
+
+		if(a==FLASHIF_OK)
+		  {
+		
+		  printf("写入成功\r\n");
+      HAL_FLASH_Lock(); 
+		  }
+		else
+			printf("写入失败,错误码为%d\r\n",a);
+
+		
+//		a=&(APPLICATION_ADDRESS|((uint32_t) & data[2]));
+		
+//    printf("取地址上第一个的数据:%x\r\n",ramsource[0]);
+
+//		printf("取地址%x的数据:%x\r\n",(flashdestination+length-10),*(__IO uint32_t*)(flashdestination+length-10));
+		printf("取地址%x的数据:%x\r\n",(flashdestination),*(__IO uint32_t*)(flashdestination));
+  }
     return 0;
 }
 /**

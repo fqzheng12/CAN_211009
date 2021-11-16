@@ -23,6 +23,7 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
+#include "flash_if.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -51,6 +52,7 @@
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+uint8_t jump_flag=0;
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -68,14 +70,18 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 //	SCB->VTOR = 0x08010000U; //Vec
-//	uint8_t Data[]={0xAA,0x55,0xAA,0x54,0xAA,0x53,0xAA,0x52,0xAA,0x51,0xAA,0x50,0xAA,0x51,0xAA,0x52,0xAA,0x53,0xAA,0x54,0xAA,0x55,};
+//	uint32_t Data_Orig=0x0fff012f;
+//	uint32_t a;
+	uint8_t Data[]={0xAA,0x55,0xAA,0x54,0xAA,0x53,0xAA,0x52,0xAA,0x51,0xAA,0x50,0xAA,0x51,0xAA,0x52,0xAA,0x53,0xAA,0x54,0xAA,0x55,};
 //  NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x10000);
+		  uint8_t key = 0;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
+//	__enable_irq();//使能中断
 
   /* USER CODE BEGIN Init */
      /* 设置中断表起始地址 */
@@ -93,26 +99,82 @@ int main(void)
   MX_GPIO_Init();
   MX_CAN1_Init();
   MX_UART5_Init();
-  MX_TIM3_Init();
+  MX_TIM2_Init();
+//	FLASH_If_Erase(APPLICATION_ADDRESS);
+	
   /* USER CODE BEGIN 2 */
-
+//  if(FLASH_If_Erase(APPLICATION_ADDRESS)==0)
+//	printf("***************用户flash擦除成功****\r\n");//擦除了内存区40k的数据
+//	else
+//	printf("***************用户flash擦除失败****\r\n");
+//	
+//	if(FLASH_If_Write(APPLICATION_ADDRESS, (uint32_t*)Data, 4)==FLASHIF_OK)
+//  printf("***************用户flash写入成功****\r\n");//擦除了内存区40k的数据
+//	else
+//	printf("***************用户flash写入失败****\r\n");
+//	printf("取地址上第一个的数据:%x\r\n",*(__IO uint32_t*)(APPLICATION_ADDRESS+4));
+//	Jump2APP(APPLICATION_ADDRESS);
   /* USER CODE END 2 */
-
+//	__disable_irq();
+//	HAL_NVIC_DisableIRQ(CAN1_RX1_IRQn);
+//		HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
+//		HAL_NVIC_DisableIRQ(TIM3_IRQn);
+//    __set_FAULTMASK(1) ;
+		printf("取地址上第一个的数据:%x\r\n",(__IO uint32_t)(SCB->ICSR));
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		//  hcan_driver_send_single_frame(0x12345,Data,4);
-//	hcan_driver_send_multi_frame(0x12345,Data,4);
+//		  hcan_driver_send_single_frame(0x12345,Data,8);
+////	hcan_driver_send_multi_frame(0x12345,Data,4);
 //		hcan_driver_query_bus_status();
-//	printf("***************控制器****\r\n");
+//	printf("***************控制器1****\r\n");
+//			printf("***************控制器2****\r\n");
 //		printf("can status is=%d\r\n",HAL_CAN_GetError(&hcan1));
-//		HAL_Delay(10);
-//		
-////		hcan_packet_transmit(PRIORITY_STATUS,DEV_CENTRAL_CONTROLER,DEV_MOTOR_CONTROLER,1,HCAN_FRAME_NORMAL,Data,10);
+//		HAL_Delay(1000);
+////		
+//		hcan_packet_transmit(PRIORITY_STATUS,DEV_CENTRAL_CONTROLER,DEV_MOTOR_CONTROLER,1,HCAN_FRAME_NORMAL,Data,8);
 //    hcan_loop();
-    /* USER CODE END WHILE */
+//					printf("***************控制器3****\r\n");
+//				HAL_Delay(1000);
+		if(jump_flag!=0)
+		{
+			printf("跳转APP运行\r\n");
 
+		HAL_CAN_MspDeInit(&hcan1);
+		HAL_UART_MspDeInit(&huart5);
+		HAL_TIM_Base_MspDeInit(&htim2);
+		HAL_NVIC_ClearPendingIRQ(TIM2_IRQn);
+		HAL_DeInit();
+//		HAL_FLASH_Lock();
+//		NVIC_SystemReset();
+//		HAL_NVIC_DisableIRQ(CAN1_RX1_IRQn);
+//		HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
+//		HAL_NVIC_DisableIRQ(TIM3_IRQn);
+		HAL_NVIC_DisableIRQ(SysTick_IRQn);
+		HAL_NVIC_ClearPendingIRQ(SysTick_IRQn);
+				Jump2APP(APPLICATION_ADDRESS);
+		}
+    /* USER CODE END WHILE */
+// HAL_UART_Receive(&huart5, &key, 1, 0xFFFFFFFF);
+		if(key=='5' )
+		{
+			printf("跳转APP运行\r\n");
+
+		HAL_CAN_MspDeInit(&hcan1);
+		HAL_UART_MspDeInit(&huart5);
+		HAL_TIM_Base_MspDeInit(&htim2);
+		HAL_NVIC_ClearPendingIRQ(TIM2_IRQn);
+		HAL_DeInit();
+//		HAL_FLASH_Lock();
+//		NVIC_SystemReset();
+//		HAL_NVIC_DisableIRQ(CAN1_RX1_IRQn);
+//		HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
+//		HAL_NVIC_DisableIRQ(TIM3_IRQn);
+		HAL_NVIC_DisableIRQ(SysTick_IRQn);
+		HAL_NVIC_ClearPendingIRQ(SysTick_IRQn);
+				Jump2APP(APPLICATION_ADDRESS);
+		}
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

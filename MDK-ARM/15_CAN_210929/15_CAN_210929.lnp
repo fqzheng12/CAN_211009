@@ -7,6 +7,8 @@
 "15_can_210929\usart.o"
 "15_can_210929\stm32f4xx_it.o"
 "15_can_210929\stm32f4xx_hal_msp.o"
+"15_can_210929\common.o"
+"15_can_210929\flash_if.o"
 "15_can_210929\stm32f4xx_hal_can.o"
 "15_can_210929\stm32f4xx_hal_rcc.o"
 "15_can_210929\stm32f4xx_hal_rcc_ex.o"

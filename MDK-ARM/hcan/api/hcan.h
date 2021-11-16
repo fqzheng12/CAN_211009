@@ -155,7 +155,7 @@ typedef enum {
  * @brief 规定数据接收连续帧时的反馈频率, 块大小（帧数）
  */
 #ifndef HCAN_BS
-#define HCAN_BS (32)
+#define HCAN_BS (33)
 #endif
 /* * 
  *@brief 接收端的接收能力，发送端最小发送间隔
